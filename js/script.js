@@ -1,48 +1,64 @@
-// comingsoon.js
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-// Create container
-const container = document.createElement('div');
-container.style.height = '100vh';
-container.style.background = 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)';
-container.style.display = 'flex';
-container.style.flexDirection = 'column';
-container.style.justifyContent = 'center';
-container.style.alignItems = 'center';
-container.style.fontFamily = '"Press Start 2P", cursive';
-container.style.color = '#00ffcc';
-container.style.textShadow = '0 0 10px #00ffcc, 0 0 20px #00ffcc';
-document.body.style.margin = '0';
-document.body.style.backgroundColor = '#000';
-document.body.appendChild(container);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// Load Google Font (retro pixel style)
-const link = document.createElement('link');
-link.href = 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap';
-link.rel = 'stylesheet';
-document.head.appendChild(link);
+let particles = [];
 
-// Create animated heading
-const heading = document.createElement('h1');
-heading.textContent = 'COMING SOON';
-heading.style.fontSize = '32px';
-heading.style.animation = 'pulse 1.2s infinite alternate';
-container.appendChild(heading);
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 3 + 1;
+    this.speedX = Math.random() * 2 - 1;
+    this.speedY = Math.random() * 2 - 1;
+    this.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+  }
 
-// Create subtext
-const subheading = document.createElement('p');
-subheading.textContent = 'by Monon & Shimanto';
-subheading.style.fontSize = '14px';
-subheading.style.marginTop = '20px';
-subheading.style.color = '#ff00ff';
-subheading.style.textShadow = '0 0 8px #ff00ff';
-container.appendChild(subheading);
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
 
-// Add glow animation via JS
-const style = document.createElement('style');
-style.textContent = `
-@keyframes pulse {
-  0% { text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc; }
-  100% { text-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc; }
+    if (this.size > 0.2) this.size -= 0.1;
+  }
+
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
-`;
-document.head.appendChild(style);
+
+function handleParticles() {
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+
+    if (particles[i].size <= 0.2) {
+      particles.splice(i, 1);
+      i--;
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  handleParticles();
+  requestAnimationFrame(animate);
+}
+
+function init() {
+  for (let i = 0; i < 100; i++) {
+    particles.push(new Particle());
+  }
+}
+
+window.addEventListener('resize', function() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+init();
+animate();
