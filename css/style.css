@@ -1,212 +1,98 @@
-/* IMPORT FONT */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-/* COLOR VARIABLES */
-:root {
-    --primary-color: #0D1936;
-    --secondary-color: #535354;
-    --background-color: #EFEFEF;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --white-color: #FFF;
-    --black-color: #000;
-    --input-border-color: #E3E4E6;
-    --transition-3s: 0.3s;
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* GLOBAL STYLES */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+body {
+  background: #0f0f1b;
+  color: #00ffea;
+  font-family: 'Press Start 2P', cursive, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-/* REUSABLE ELEMENTS */
-a{
-    text-decoration: none;
-    color: var(--black-color);
-    transition: var(--transition-3s);
-}
-a:hover{
-    text-decoration: underline;
+.container {
+  text-align: center;
+  z-index: 2;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: var(--background-color);
+h1 {
+  font-size: 3rem;
+  position: relative;
+  color: #00ffea;
+  text-shadow: 0 0 5px #00ffea, 0 0 10px #00ffea, 0 0 20px #00ffea;
 }
 
-/* WRAPPER */
-.wrapper{
-    position: relative;
-    width: 430px;
-    height: 500px;
-    background-color: var(--white-color);
-    border-radius: 15px;
-    padding: 120px 32px 64px;
-    border: 1px solid var(--primary-color);
-    box-shadow: 0 8px 15px var(--shadow-color);
-    transition: var(--transition-3s);
-    overflow: hidden;
-}
-/* FORM HEADER */
-.form-header{
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 140px;
-    height: 70px;
-    background-color: var(--primary-color);
-    border-radius: 0 0 20px 20px;
-}
-.form-header::before, .form-header::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    width: 30px;
-    height: 30px;
-}
-.form-header::before{
-    left: -30px;
-    border-top-right-radius: 50%;
-    box-shadow: 15px 0 0 var(--primary-color);
-}
-.form-header::after{
-    right: -30px;
-    border-top-left-radius: 50%;
-    box-shadow: -15px 0 0 var(--primary-color);
-}
-/* TITLES */
-.titles{
-    position: relative;
-}
-.title-login, .title-register{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    color: var(--white-color);
-    font-size: 24px;
-    transition: var(--transition-3s);
-}
-.title-register{
-    top: 50px;
+.glitch {
+  position: relative;
 }
 
-/* FORMS */
-.login-form, .register-form{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    transition: var(--transition-3s);
-}
-.register-form{
-    left: 150%;
-}
-
-/* INPUT FIELDS */
-.input-box{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 20px 0;
-}
-.input-field{
-    width: 100%;
-    height: 55px;
-    font-size: 16px;
-    background: transparent;
-    color: var(--black-color);
-    padding: 0 20px;
-    border: 1px solid var(--input-border-color);
-    border-radius: 30px;
-    outline: none;
-    transition: var(--transition-3s);
-}
-.input-field:focus{
-    border: 1px solid var(--primary-color);
-}
-.label{
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    color: var(--secondary-color);
-    transition: 0.2s;
-    cursor: text;
-}
-.input-field:focus ~ .label,
-.input-field:valid ~ .label{
-    top: 0;
-    font-size: 14px;
-    background-color: var(--white-color);
-    color: var(--primary-color);
-    padding: 0 10px;
-}
-.input-field:valid ~ .label{
-    color: var(--secondary-color);
-}
-.icon{
-    position: absolute;
-    top: 50%;
-    right: 25px;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: var(--secondary-color);
-}
-/* FORGOT PASSWORD & TERMS AND CONDITIONS */
-.form-cols{
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-}
-.col-1{
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-/* SUBMIT BUTTON */
-.btn-submit{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    height: 50px;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: var(--transition-3s);
-}
-.btn-submit:hover{
-    gap: 15px;
-}
-.btn-submit i{
-    font-size: 20px;
-}
-/* SWITCH FORM */
-.switch-form{
-    text-align: center;
-}
-.switch-form a{
-    font-weight: 500;
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #ff00c8;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch 2s infinite linear alternate-reverse;
 }
 
-/* RESPONSIVE STYLES */
-@media only screen and (max-width: 564px){
-    .wrapper{
-        margin: 20px;
-    }
+.glitch::after {
+  color: #00fff9;
+  animation: glitch 2s infinite linear alternate-reverse;
+  animation-delay: 1s;
+}
+
+@keyframes glitch {
+  0% {
+    clip: rect(42px, 9999px, 44px, 0);
+    transform: translate(-5px, -5px);
+  }
+  20% {
+    clip: rect(12px, 9999px, 20px, 0);
+    transform: translate(5px, 5px);
+  }
+  40% {
+    clip: rect(62px, 9999px, 70px, 0);
+    transform: translate(-5px, 5px);
+  }
+  60% {
+    clip: rect(22px, 9999px, 30px, 0);
+    transform: translate(5px, -5px);
+  }
+  80% {
+    clip: rect(82px, 9999px, 90px, 0);
+    transform: translate(-5px, -5px);
+  }
+  100% {
+    clip: rect(12px, 9999px, 20px, 0);
+    transform: translate(5px, 5px);
+  }
+}
+
+.subtitle {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #ff00c8;
+  text-shadow: 0 0 5px #ff00c8, 0 0 10px #ff00c8;
+}
+
+/* Canvas for some gaming particles */
+#gameCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
