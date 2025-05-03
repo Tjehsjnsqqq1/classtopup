@@ -3,63 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
+    <title>Game Store - Coming Soon</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: url('gaming-background.jpg') no-repeat center center fixed;
+            background-size: cover;
             text-align: center;
-            background-color: #f8f9fa;
-            padding: 50px;
+            color: white;
+            margin: 0;
+            padding: 0;
         }
         .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
             max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
         }
         h1 {
-            color: #333;
+            font-size: 48px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
         p {
-            color: #555;
+            font-size: 20px;
         }
-        .countdown {
-            font-size: 1.5em;
+        #countdown {
+            font-size: 32px;
             font-weight: bold;
-            color: #007bff;
+        }
+        .cta {
+            margin-top: 20px;
+        }
+        .cta a {
+            text-decoration: none;
+            background: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>Coming Soon</h1>
-        <p>We’re working hard to launch something amazing. Stay tuned!</p>
-        <p class="countdown">Launching in: <span id="countdown"></span></p>
+        <h1>Coming Soon!</h1>
+        <p>We're launching our game store soon! Stay tuned for epic deals and awesome games.</p>
+        <p id="countdown"></p>
+        <div class="cta">
+            <a href="#">Get Notified</a>
+        </div>
     </div>
 
     <script>
-        const launchDate = new Date("June 30, 2025 00:00:00").getTime();
-        const countdown = document.getElementById("countdown");
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const timeLeft = launchDate - now;
-
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-            countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-            if (timeLeft < 0) {
-                countdown.innerHTML = "We're live!";
-            }
+        function countdownTimer() {
+            const launchDate = new Date("June 1, 2025 00:00:00").getTime();
+            setInterval(function() {
+                const now = new Date().getTime();
+                const timeLeft = launchDate - now;
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
         }
 
-        setInterval(updateCountdown, 1000);
+        countdownTimer();
     </script>
+
 </body>
 </html>
