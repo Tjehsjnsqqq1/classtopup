@@ -1,18 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coming Soon | Monon & Shimanto</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .countdown {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="glitch" data-text="COMING SOON">COMING SOON</h1>
-    <p class="subtitle">by Monon & Shimanto</p>
-    <canvas id="gameCanvas"></canvas>
-  </div>
+    <div class="container">
+        <h1>Coming Soon</h1>
+        <p>We’re working hard to launch something amazing. Stay tuned!</p>
+        <p class="countdown">Launching in: <span id="countdown"></span></p>
+    </div>
 
-  <script src="script.js"></script>
+    <script>
+        const launchDate = new Date("June 30, 2025 00:00:00").getTime();
+        const countdown = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = launchDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (timeLeft < 0) {
+                countdown.innerHTML = "We're live!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>
